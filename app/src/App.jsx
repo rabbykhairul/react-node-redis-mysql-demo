@@ -10,6 +10,8 @@ function App() {
   const [selected, setSelected] = useState(null);
   const [country, setCountry] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
 
   useEffect(() => {
     if (!selected) return;
@@ -36,6 +38,19 @@ function App() {
       });
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim() || !about.trim()) {
+      alert("Please enter name & about info to save country!");
+    }
+
+    axios.post(`${BASE_URL}/countries`, { name, about }).then(() => {
+      setCountries([name, ...countries]);
+      setName("");
+      setAbout("");
+    });
+  };
+
   return (
     <>
       <header
@@ -50,7 +65,21 @@ function App() {
         <h1>Country List</h1>
       </header>
       <div style={{ display: "flex", borderBottom: "1px solid black" }}>
-        <section>Foo</section>
+        <section>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <br />
+            <input type="text" name="name" onChange={(e) => setName(e.target.value)} value={name} />
+
+            <br />
+            <label htmlFor="about">About</label>
+            <br />
+            <textarea type="textarea" name="about" onChange={(e) => setAbout(e.target.value)} value={about} />
+
+            <br />
+            <button>Save</button>
+          </form>
+        </section>
         <section>
           {countries.map((c, idx) => (
             <div className={classnames("list", { selected: c === selected })} key={idx} onClick={() => setSelected(c)}>
