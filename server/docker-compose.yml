@@ -1,0 +1,28 @@
+version: '3'
+services:
+  mysql:
+    image: 'mysql/mysql-server:8.0'
+    ports:
+      - '4066:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: '${DB_NAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - './data/mysql:/var/lib/mysql'
+      - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+
+  redis:
+    image: redis
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "${REDIS_PORT}:6379"
+    expose:
+      - ${REDIS_PORT}
+    command:
+      - /bin/sh
+      - -c
+      - redis-server --requirepass ${REDIS_DEFAULT_PASSWORD} --user ${REDIS_USERNAME} \>${REDIS_PASSWORD} on +@all ~* allchannels --user khairul \>${REDIS_PASSWORD} on +@all ~* allchannels
