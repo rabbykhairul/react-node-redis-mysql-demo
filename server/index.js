@@ -1,5 +1,7 @@
 require("dotenv").config();
 const cors = require("cors");
+const db = require("./database/db");
+const { COUNTRIES } = require("./database/tableNames");
 
 const express = require("express");
 const app = express();
@@ -15,6 +17,18 @@ app.use(express.urlencoded({ extended: false })); // parse application/x-www-for
 
 app.get("/status", (req, res) => {
   return res.json({ status: "UP" });
+});
+
+app.post("/countries", async (req, res) => {
+  try {
+    const { name, about } = req.body;
+    await db(COUNTRIES).insert({ name, about });
+
+    res.json({ status: "ok" });
+  } catch (err) {
+    console.log("err: ", err);
+    res.status(400).json({ message: "Something went wrong" });
+  }
 });
 
 app.listen(port, () => {
