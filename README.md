@@ -28,6 +28,7 @@ SERVER_PORT=4000
 
 4) Run the following commands to do `database` migration & seed
 ```shell
+$ npm install
 $ knex migrate:latest
 $ knex seed:run
 ```
@@ -42,5 +43,6 @@ $ node index.js
 # At the project root folder
 # cd into the `app` folder
 $ cd app
+$ npm install
 $ npm run dev
 ```
