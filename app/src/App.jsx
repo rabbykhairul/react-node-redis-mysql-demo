@@ -21,13 +21,26 @@ function App() {
 
   return (
     <>
-      <header style={{ width: "100vw", display: "flex", alignItems: "center", flexDirection: "column" }}>
+      <header
+        style={{
+          width: "100vw",
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          borderBottom: "1px solid black",
+        }}
+      >
         <h1>Country List</h1>
-        <hr style={{ width: "100%" }} />
       </header>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", borderBottom: "1px solid black" }}>
         <section>Foo</section>
-        <section>Foo</section>
+        <section>
+          {countries.map((c, idx) => (
+            <div className="list" key={idx}>
+              {c}
+            </div>
+          ))}
+        </section>
         <section>Foo</section>
       </div>
     </>
