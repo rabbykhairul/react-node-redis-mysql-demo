@@ -26,7 +26,7 @@ REDIS_PASSWORD=123456
 SERVER_PORT=4000
 ```
 
-> **Now install `docker` and then run the next command to setup `mysql` & `redis` server using `docker compose.` *(Optional)***
+> **Now install `docker` and then run the next command to setup `mysql` & `redis` server using `docker compose.`**
 ```shell
 $ docker compose up -d
 ```
