@@ -51,7 +51,7 @@ app.get("/countries/:name", async (req, res) => {
     }
 
     const dbRes = await db(COUNTRIES).where({ name }).first();
-    res.json(dbRes);
+    res.json({ ...dbRes, cache: false });
 
     await cache.set(name, dbRes.about);
   } catch (err) {
