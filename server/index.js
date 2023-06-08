@@ -32,6 +32,15 @@ app.post("/countries", async (req, res) => {
   }
 });
 
+app.get("/countries", async (req, res) => {
+  try {
+    const dbRes = await db(COUNTRIES).select("name");
+    res.json(dbRes.map((c) => c.name));
+  } catch (err) {
+    res.status(400).json({ message: "Something went wrong" });
+  }
+});
+
 app.get("/countries/:name", async (req, res) => {
   try {
     const { name } = req.params;
