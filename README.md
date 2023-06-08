@@ -8,7 +8,7 @@
 $ npm install knex -g
 ```
 
-2) `cd` into the `server` folder.
+2) `cd` into the `server` folder from project **root**.
 3) Create a `.env` file with the following values.
 ```javascript
 DB_PASSWORD=foo
