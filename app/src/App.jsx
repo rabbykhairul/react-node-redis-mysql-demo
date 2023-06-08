@@ -1,7 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import axios from "axios";
+
+const BASE_URL = "http://localhost:4000";
 
 function App() {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/countries`)
+      .then(({ data }) => {
+        setCountries(data);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+        alert("Can't load data");
+      });
+  }, []);
+
   return (
     <>
       <header style={{ width: "100vw", display: "flex", alignItems: "center", flexDirection: "column" }}>
