@@ -2,6 +2,7 @@ require("dotenv").config();
 const cors = require("cors");
 const db = require("./database/db");
 const { COUNTRIES } = require("./database/tableNames");
+const cache = require("./cache");
 
 const express = require("express");
 const app = express();
@@ -27,6 +28,24 @@ app.post("/countries", async (req, res) => {
     res.json({ status: "ok" });
   } catch (err) {
     console.log("err: ", err);
+    res.status(400).json({ message: "Something went wrong" });
+  }
+});
+
+app.get("/countries/:name", async (req, res) => {
+  try {
+    const { name } = req.params;
+    const value = await cache.get(name);
+
+    if (value) {
+      return res.json({ name, about: value, cache: true });
+    }
+
+    const dbRes = await db(COUNTRIES).where({ name }).first();
+    res.json(dbRes);
+
+    await cache.set(name, dbRes.about);
+  } catch (err) {
     res.status(400).json({ message: "Something went wrong" });
   }
 });
