@@ -1,0 +1,9 @@
+section {
+  width: 33vw;
+  border-right: 1px solid #232323;
+  padding: 15px;
+}
+
+section:last-child {
+  border: none;
+}
