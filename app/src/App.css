@@ -17,3 +17,8 @@ section:last-child {
   border-radius: 15px;
   cursor: pointer;
 }
+
+.selected {
+  background-color: #232323;
+  color: white;
+}
