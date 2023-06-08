@@ -26,6 +26,11 @@ REDIS_PASSWORD=123456
 SERVER_PORT=4000
 ```
 
+> **Now install `docker` and then run the next command to setup `mysql` & `redis` server using `docker compose.` *(Optional)***
+```shell
+$ docker compose up -d
+```
+
 4) Run the following commands to do `database` migration & seed
 ```shell
 $ npm install
