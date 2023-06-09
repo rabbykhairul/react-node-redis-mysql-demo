@@ -42,6 +42,7 @@ function App() {
     e.preventDefault();
     if (!name.trim() || !about.trim()) {
       alert("Please enter name & about info to save country!");
+      return;
     }
 
     axios.post(`${BASE_URL}/countries`, { name, about }).then(() => {
