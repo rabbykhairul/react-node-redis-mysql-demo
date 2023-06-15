@@ -41,6 +41,16 @@ app.get("/countries", async (req, res) => {
   }
 });
 
+app.get("/count", async (req, res) => {
+  try {
+    const dbRes = await db.raw(`call countryCount()`);
+    res.json({ count: dbRes[0][0][0].total, status: "OK" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something wetn wrong" });
+  }
+});
+
 app.get("/countries/:name", async (req, res) => {
   try {
     const { name } = req.params;
