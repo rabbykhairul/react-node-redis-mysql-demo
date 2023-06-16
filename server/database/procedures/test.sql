@@ -5,6 +5,6 @@ BEGIN
 
   SELECT count(*) INTO total FROM countries;
 
-  SELECT @total;
+  SELECT total;
 END
 
